@@ -49,10 +49,10 @@ services:
       - traefik
     networks:
       - whaticket
+    env_file:
+      - .env
 
   frontend:
-    # ports:
-    #   - ${FRONTEND_SSL_PORT:-3001}:443
     build:
       context: ./frontend
       dockerfile: ./Dockerfile
@@ -66,13 +66,12 @@ services:
       - "traefik.http.routers.frontend.rule=Host(`zap.pactoteste.com`)"
       - "traefik.http.routers.frontend.entrypoints=web"
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
-    # volumes:
-    #   - ./ssl/certs/:/etc/nginx/ssl/
-    #   - ./ssl/www/:/var/www/letsencrypt/
     depends_on:
       - traefik
     networks:
       - whaticket
+    env_file:
+      - .env
 
   mysql:
     image: ${MYSQL_ENGINE:-mariadb}:${MYSQL_VERSION:-10.6}
@@ -83,6 +82,8 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE:-whaticket}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-strongpassword}
       - TZ=${TZ:-America/Fortaleza}
+    env_file:
+      - .env
     ports:
       - ${MYSQL_PORT:-3306}:3306
     restart: always
