@@ -38,11 +38,11 @@ services:
       - CHROME_ARGS=--no-sandbox --disable-setuid-sandbox
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`api.whaticket.com`)"
+      - "traefik.http.routers.backend.rule=Host(`zap-api.pactoteste.com`)"
       - "traefik.http.routers.backend.entrypoints=web"
       - "traefik.http.services.backend.loadbalancer.server.port=3000"
     extra_hosts:
-      - "api.whaticket.com:192.168.158.43"
+      - "zap-api.pactoteste.com:192.168.158.43"
       - "whaticket.com:192.168.158.43"
     # ports:
     #   - ${BACKEND_PORT:-8080}:3000
@@ -67,7 +67,7 @@ services:
       - FRONTEND_SERVER_NAME=${FRONTEND_SERVER_NAME}
       - BACKEND_SERVER_NAME=${BACKEND_SERVER_NAME}
     extra_hosts:
-      - "api.whaticket.com:192.168.158.43"
+      - "zap-api.pactoteste.com:192.168.158.43"
       - "whaticket.com:192.168.158.43"
     labels:
       - "traefik.enable=true"
@@ -78,7 +78,7 @@ services:
     #   - ./ssl/certs/:/etc/nginx/ssl/
     #   - ./ssl/www/:/var/www/letsencrypt/
     depends_on:
-      - traefik
+      - tra
     networks:
       - whaticket
 
