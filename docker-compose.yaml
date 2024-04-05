@@ -70,7 +70,7 @@ services:
     #   - ./ssl/certs/:/etc/nginx/ssl/
     #   - ./ssl/www/:/var/www/letsencrypt/
     depends_on:
-      - tra
+      - traefik
     networks:
       - whaticket
 
