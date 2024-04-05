@@ -41,11 +41,6 @@ services:
       - "traefik.http.routers.backend.rule=Host(`zap-api.pactoteste.com`)"
       - "traefik.http.routers.backend.entrypoints=web"
       - "traefik.http.services.backend.loadbalancer.server.port=3000"
-    extra_hosts:
-      - "zap-api.pactoteste.com:192.168.158.43"
-      - "whaticket.com:192.168.158.43"
-    # ports:
-    #   - ${BACKEND_PORT:-8080}:3000
     volumes:
       - ./backend/public/:/usr/src/app/public/
       - ./backend/.wwebjs_auth/:/usr/src/app/.wwebjs_auth/
@@ -66,12 +61,9 @@ services:
       - REACT_APP_BACKEND_URL=${BACKEND_URL}
       - FRONTEND_SERVER_NAME=${FRONTEND_SERVER_NAME}
       - BACKEND_SERVER_NAME=${BACKEND_SERVER_NAME}
-    extra_hosts:
-      - "zap-api.pactoteste.com:192.168.158.43"
-      - "whaticket.com:192.168.158.43"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`whaticket.com`)"
+      - "traefik.http.routers.frontend.rule=Host(`zap.pactoteste.com`)"
       - "traefik.http.routers.frontend.entrypoints=web"
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
     # volumes:
